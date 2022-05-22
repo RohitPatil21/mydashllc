@@ -1,0 +1,32 @@
+import { useState } from "react";
+import "../Scss_Styles/FormInput.scss";
+
+
+
+const FormInput = (props) => {
+  const [focused, setFocused] = useState(false);
+  const { label, errorMessage, onChange, id, className, ...inputProps } = props;
+
+  const handleFocus = (e) => {
+    setFocused(true);
+  };
+
+  return (
+    <div className="formInput">
+      <label>{label}</label>
+      <input
+        {...inputProps}
+        onChange={onChange}
+        onBlur={handleFocus}
+        onFocus={() =>
+          inputProps.name === "confirmPassword" && setFocused(true)
+        }
+        focused={focused.toString()}
+        className = {className}
+      />
+      <span>{errorMessage}</span>
+    </div>
+  );
+};
+
+export default FormInput;
